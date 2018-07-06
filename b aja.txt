@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular.min.js"></script>
+   <meta charset="utf-8">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-route.js"></script>
+   <title>Syahrul Gunawan 16.11.0428</title>
+
+    <style>
+         table, th , td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+         }
+         
+         table tr:nth-child(odd) {
+            background-color: #f2f2f2;
+         }
+         
+         table tr:nth-child(even) {
+            background-color: #ffffff;
+         }
+      </style>
+
+   <script>
+      var app = angular.module("myApp",["ngRoute"]);
+      app.controller('tableJSON',function($scope, $http){
+         $http.get('https://api.myjson.com/bins/8nts4')
+         .then(function(response){
+            $scope.names = response.data.data;
+         });
+      })
+   </script>
+</head>
+
+
+<body>
+  
+   <h2>16.11.0428</h2>
+   <div ng-app="myApp" ng-controller="tableJSON">
+      <table>
+
+         <table>
+            <tr>
+               <th>No</th>
+               <th>Name</th>
+               <th>Position</th>
+               <th>Start</th>
+               <th>Salary</th>
+
+            </tr>
+         <tr ng-repeat="data in names">
+
+                 <td align="center"></td><!-- Kosongkan untuk td pertama ini -->
+             <td> {{data.name}} </td>
+              <td> {{data.pos}} </td>
+            <td> {{data.start}} </td>
+            <td> US$ {{data.sallary}} </td>
+         </tr>
+
+         <tfoot>
+         <tr>
+            <th colspan="4">Total</th>
+            <th>US$ 379000 </th>
+         </tr>
+      </tfoot>
+      </table>
+   </div>
+</body>
+</html>
